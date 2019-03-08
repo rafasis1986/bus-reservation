@@ -16,7 +16,6 @@ class Common(Configuration):
         'django.contrib.messages',
         'django.contrib.staticfiles',
 
-
         # Third party apps
         'rest_framework',            # utilities for rest apis
         'rest_framework.authtoken',  # token authentication
@@ -24,6 +23,7 @@ class Common(Configuration):
 
         # Your apps
         'busreservation.users',
+        'busreservation.reservations',
 
     )
 
@@ -40,7 +40,7 @@ class Common(Configuration):
 
     ALLOWED_HOSTS = ["*"]
     ROOT_URLCONF = 'busreservation.urls'
-    SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
+    SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'local')
     WSGI_APPLICATION = 'busreservation.wsgi.application'
 
     # Email
