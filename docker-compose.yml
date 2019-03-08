@@ -46,4 +46,12 @@ services:
     command: "mkdocs serve"
     ports:
       - "8001:8001"
-  
+
+  vue:
+    build:
+        context: .
+        dockerfile: ./docker/vue/Dockerfile
+    volumes:
+        - ./webapp:/webapp
+    ports:
+      - "8080:80"
