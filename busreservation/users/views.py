@@ -7,6 +7,7 @@ from .serializers import CreateUserSerializer, UserSerializer
 
 class UserViewSet(mixins.RetrieveModelMixin,
                   mixins.UpdateModelMixin,
+                  mixins.ListModelMixin,
                   viewsets.GenericViewSet):
     """
     Updates and retrieves user accounts
