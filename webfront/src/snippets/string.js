@@ -78,18 +78,6 @@ export const rutValidate = (rut) => {
 	return false;
 };
 
-const zerosLeftAdd = (string, length) => {
-	string = string.toString()
-	const zerosMissing = length - string.length;
-	if(zerosMissing > 0){
-		// eslint-disable-next-line
-		for(const i of [...Array(zerosMissing).keys()]) {
-			string = '0' + string;
-		}
-	}
-	return string;
-};
-
 export const zerosLeftRemove = (string) => {
 	return !string || isNaN(string * 1) ? string : (string * 1).toString()
 };

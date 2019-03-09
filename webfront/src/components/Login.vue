@@ -114,7 +114,7 @@
 			},
 			errorRutMessage() {
 				if(!this.$v.rut.required) {
-					return HELP_MESSAGES.VALUE_REQUIRED('rut');
+					return HELP_MESSAGES.REQUIRED_VALUE('rut');
 				}
 				else if(!this.$v.rut.rutValidate) {
 					return HELP_MESSAGES.INVALID_RUT;
@@ -125,7 +125,7 @@
 			},
 			errorPasswordMessage() {
 				if(!this.$v.password.required) {
-					return HELP_MESSAGES.VALUE_REQUIRED('password');
+					return HELP_MESSAGES.REQUIRED_VALUE('password');
 				}
 				else {
 					return HELP_MESSAGES.DEFAULT;

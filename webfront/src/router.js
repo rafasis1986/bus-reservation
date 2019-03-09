@@ -15,7 +15,7 @@ const router = new Router({
 		
 		},
 		{ path: '/error', component: ErrorMsg },
-		{ path: '*', redirect: '/inicio' }
+		{ path: '*', redirect: '/start' }
 	]
 });
 
