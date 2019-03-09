@@ -1,18 +1,42 @@
 import uuid
-from django.db import models
+
 from django.conf import settings
-from django.dispatch import receiver
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, UserManager
+from django.db import models
 from django.db.models.signals import post_save
+from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
+
+from busreservation.users.snippets.validators import RutValidator
+
+
+class CustomUserManager(UserManager):
+
+    def create_user(self, username, email, password=None, **extra_fields):
+        if not email:
+            raise ValueError('The given email must be set')
+        extra_fields.setdefault('is_staff', False)
+        extra_fields.setdefault('is_superuser', False)
+        extra_fields.setdefault('is_active', False)
+        return self._create_user(username, email, password, **extra_fields)
 
 
 class User(AbstractUser):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    rut = models.CharField(max_length=12, unique=True, db_index=True)
+    username_validator = RutValidator()
 
-    def __str__(self):
-        return self.username
+    username = models.CharField(
+        name='username',
+        max_length=11,
+        unique=True,
+        help_text='Required. 11 characters or fewer. digits only.',
+        validators=[username_validator],
+        error_messages={
+            'unique': 'A user with that rut already exists.',
+        },
+    )
+
+    objects = CustomUserManager()
 
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
