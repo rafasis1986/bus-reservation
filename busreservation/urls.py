@@ -11,12 +11,10 @@ PREFIX_API = 'api/v1/'
 urlpatterns = [
     path('admin/', admin.site.urls),
     path(PREFIX_API, include('busreservation.users.urls')),
-    path('{0}reservations/'.format(PREFIX_API),
+    path(PREFIX_API,
          include('busreservation.reservations.urls')),
 
-    path('{0}login/'.format(PREFIX_API),
-         obtain_jwt_token),
-
+    path('{0}login/'.format(PREFIX_API), obtain_jwt_token),
     # the 'api-root' from django rest-frameworks default router
     # http://www.django-rest-framework.org/api-guide/routers/#defaultrouter
     re_path(r'^$', RedirectView.as_view(url=reverse_lazy('api-root'), permanent=False)),

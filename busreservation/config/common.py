@@ -189,8 +189,8 @@ class Common(Configuration):
 
     # Django Rest Framework
     REST_FRAMEWORK = {
-        'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-        'PAGE_SIZE': int(os.getenv('DJANGO_PAGINATION_LIMIT', 10)),
+        'PAGE_SIZE': int(os.getenv('DJANGO_PAGINATION_LIMIT', 20)),
+        'DEFAULT_PAGINATION_CLASS': 'rest_framework_json_api.pagination.JsonApiPageNumberPagination',
         'DATETIME_FORMAT': '%Y-%m-%dT%H:%M:%S%z',
         'DEFAULT_RENDERER_CLASSES': (
             'rest_framework.renderers.JSONRenderer',
@@ -200,10 +200,29 @@ class Common(Configuration):
             'rest_framework.permissions.IsAuthenticated',
         ],
         'DEFAULT_AUTHENTICATION_CLASSES': (
-            'rest_framework.authentication.SessionAuthentication',
             'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-        )
+        ),
+        'DEFAULT_PARSER_CLASSES': (
+            'rest_framework_json_api.parsers.JSONParser',
+            'rest_framework.renderers.BrowsableAPIRenderer',
+            'rest_framework.parsers.MultiPartParser',
+        ),
+        'DEFAULT_FILTER_BACKENDS': (
+            'rest_framework_json_api.filters.QueryParameterValidationFilter',
+            'rest_framework_json_api.filters.OrderingFilter',
+            'rest_framework_json_api.django_filters.DjangoFilterBackend',
+            'rest_framework.filters.SearchFilter',
+        ),
+        'SEARCH_PARAM': 'filter[search]',
+        'EXCEPTION_HANDLER': 'rest_framework_json_api.exceptions.exception_handler',
+        'DEFAULT_METADATA_CLASS': 'rest_framework_json_api.metadata.JSONAPIMetadata',
+        'TEST_REQUEST_RENDERER_CLASSES': (
+            'rest_framework_json_api.renderers.JSONRenderer',
+        ),
+        'TEST_REQUEST_DEFAULT_FORMAT': 'vnd.api+json'
     }
+
+    REST_USE_JWT = True
 
     JWT_AUTH = {
         'JWT_EXPIRATION_DELTA': datetime.timedelta(days=7),
@@ -219,5 +238,11 @@ class Common(Configuration):
         'JWT_VERIFY_EXPIRATION': True,
         'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=7)
     }
+
+    JSON_API_FORMAT_KEYS = 'underscore'
+    JSON_API_FORMAT_TYPES = 'underscore'
+    JSON_API_FORMAT_FIELD_NAMES = 'underscore'
+    JSON_API_PLURALIZE_TYPES = True
+    JSON_API_PLURALIZE_RELATION_TYPE = True
 
     CORS_ORIGIN_ALLOW_ALL = True

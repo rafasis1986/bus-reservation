@@ -38,6 +38,9 @@ class User(AbstractUser):
 
     objects = CustomUserManager()
 
+    class JSONAPIMeta:
+        resource_name = 'user'
+
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_auth_token(sender, instance=None, created=False, **kwargs):

@@ -12,6 +12,9 @@ class Bus(models.Model):
         db_table = 'bus'
         verbose_name_plural = 'buses'
 
+    class JSONAPIMeta:
+        resource_name = 'bus'
+
     def __str__(self):
         return self.code
 
@@ -22,6 +25,9 @@ class City(models.Model):
     class Meta:
         db_table = 'city'
         verbose_name_plural = 'cities'
+
+    class JSONAPIMeta:
+        resource_name = 'city'
 
     def __str__(self):
         return self.name
@@ -37,6 +43,9 @@ class Itinerary(models.Model):
         verbose_name_plural = 'itineraries'
         unique_together = (('origin', 'destination', 'start'),)
 
+    class JSONAPIMeta:
+        resource_name = 'itinerary'
+
 
 class Trip(models.Model):
     bus = models.ForeignKey(Bus, on_delete=models.CASCADE)
@@ -45,6 +54,9 @@ class Trip(models.Model):
     class Meta:
         db_table = 'trip'
         unique_together = (('bus', 'itinerary'),)
+
+    class JSONAPIMeta:
+        resource_name = 'trip'
 
 
 class Ticket(models.Model):
@@ -55,3 +67,6 @@ class Ticket(models.Model):
     class Meta:
         db_table = 'ticket'
         unique_together = (('trip', 'seat'),)
+
+    class JSONAPIMeta:
+        resource_name = 'ticket'
