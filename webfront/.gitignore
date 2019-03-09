@@ -41,3 +41,5 @@ docs/_book
 test/
 
 # End of https://www.gitignore.io/api/vuejs,sublimetext
+.npmrc
+package-lock.json
