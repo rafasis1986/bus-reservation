@@ -4,15 +4,18 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, re_path, reverse_lazy
 from django.views.generic.base import RedirectView
-from rest_framework.authtoken import views
+from rest_framework_jwt.views import obtain_jwt_token
 
+PREFIX_API = 'api/v1/'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/', include('busreservation.users.urls')),
-    path('api/v1/reservations/', include('busreservation.reservations.urls')),
-    path('api-token-auth/', views.obtain_auth_token),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path(PREFIX_API, include('busreservation.users.urls')),
+    path('{0}reservations/'.format(PREFIX_API),
+         include('busreservation.reservations.urls')),
+
+    path('{0}login/'.format(PREFIX_API),
+         obtain_jwt_token),
 
     # the 'api-root' from django rest-frameworks default router
     # http://www.django-rest-framework.org/api-guide/routers/#defaultrouter
