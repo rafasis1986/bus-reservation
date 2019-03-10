@@ -193,7 +193,7 @@ class Common(Configuration):
         'DEFAULT_PAGINATION_CLASS': 'rest_framework_json_api.pagination.JsonApiPageNumberPagination',
         'DATETIME_FORMAT': '%Y-%m-%dT%H:%M:%S%z',
         'DEFAULT_RENDERER_CLASSES': (
-            'rest_framework.renderers.JSONRenderer',
+            'rest_framework_json_api.renderers.JSONRenderer',
             'rest_framework.renderers.BrowsableAPIRenderer',
         ),
         'DEFAULT_PERMISSION_CLASSES': [
@@ -216,10 +216,6 @@ class Common(Configuration):
         'SEARCH_PARAM': 'filter[search]',
         'EXCEPTION_HANDLER': 'rest_framework_json_api.exceptions.exception_handler',
         'DEFAULT_METADATA_CLASS': 'rest_framework_json_api.metadata.JSONAPIMetadata',
-        'TEST_REQUEST_RENDERER_CLASSES': (
-            'rest_framework_json_api.renderers.JSONRenderer',
-        ),
-        'TEST_REQUEST_DEFAULT_FORMAT': 'vnd.api+json'
     }
 
     REST_USE_JWT = True
@@ -237,6 +233,10 @@ class Common(Configuration):
         'JWT_VERIFY': True,
         'JWT_VERIFY_EXPIRATION': True,
         'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=7)
+    }
+
+    REST_AUTH_SERIALIZERS = {
+        'USER_DETAILS_SERIALIZER': 'busreservation.users.serializers.UserSerializer'
     }
 
     JSON_API_FORMAT_KEYS = 'underscore'
