@@ -34,14 +34,14 @@ const actions = {
                 }};
 			httpClient.post(BASE_URIS.login, userData, config)
 			.then(res => {
-				sessionStorage.setItem('token', res.data.token);
+                sessionStorage.setItem('token', res.data.data.attributes.token);
+                sessionStorage.setItem('id', res.data.data.attributes.user.id);
 				sessionStorage.setItem('permissions', []);
                 dispatch('configUser', sessionStorage);
 				resolve(res);
 			})
-			.catch(res => {
-                console.log(res);
-				reject(res);
+			.catch(err => {
+				reject(err);
 			});
 		});
 	},

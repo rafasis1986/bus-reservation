@@ -76,7 +76,7 @@
 		zerosLeftRemove
 	} from '@/snippets/string';
 	import { required, minLength } from 'vuelidate/lib/validators';
-	import { createNamespacedHelpers } from 'vuex';
+    import { createNamespacedHelpers } from 'vuex';
 
 	const { mapGetters, mapActions } = createNamespacedHelpers('user');
 
@@ -141,19 +141,30 @@
 			initSesion() {
 				this.$v.$touch();
 				if(!this.$v.$error){
-					this.loading = true;
+                    this.loading = true;
 					this.login({
-						rut: this.rut,
-						password: this.password
+                        "data": {
+                            "type": "login_views",
+                            "attributes": {
+                                "username": this.rut,
+                                "password": this.password
+                                }
+                        }
+                    })
+					.then((res) => {
+                        console.log('success login');
+                        console.log(sessionStorage.getItem('token'));
 					})
-					.then(() => {
-						this.loading = false;
-					})
-					.catch((res) => {
-						this.loading = false;
-						this.authError = true;
-						this.authErrorMessage = res.response ? res.response.data.detail : ERROR_MESSAGES.DEFAULT;
-					});
+					.catch((err) => {
+                        this.authError = true;
+                        this.authErrorMessage = ERROR_MESSAGES.DEFAULT;
+                        if (err.response && err.response.data){
+                            this.authErrorMessage = err.response.data.errors['non_field_errors'][0];   
+                        }
+                    })
+                    .finally(() => {
+                        this.loading = false;
+                    })
 				}
 			}
 		},

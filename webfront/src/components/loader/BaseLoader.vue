@@ -15,7 +15,7 @@
 				type: Object,
 				required: false
 			}
-		}, // String, Number, Boolean, Array, Object, Date, Function, Symbol
+		}, 
 		data() {
 			return {};
 		},

@@ -19,7 +19,7 @@ const actions = {
 				params: { ...params }
 			})
 			.then(res => {
-				resolve(res);
+				resolve(res.data);
 			})
 			.catch(err => {
 				reject(err);
@@ -30,7 +30,7 @@ const actions = {
 		return new Promise((resolve, reject) => {
 			httpClient.post(BASE_URIS[uriName], body)
 			.then(res => {
-				resolve(res);
+				resolve(res.data);
 			})
 			.catch(err => {
 				reject(err);
@@ -42,7 +42,7 @@ const actions = {
 		return new Promise((resolve, reject) => {
 			httpClient.patch(URI, body)
 			.then(res => {
-				resolve(res);
+				resolve(res.data);
 			})
 			.catch(err => {
 				reject(err);
@@ -53,7 +53,7 @@ const actions = {
 		return new Promise((resolve, reject) => {
 			httpClient.post(BASE_URIS[uriName], body, config)
 			.then(res => {
-				resolve(res);
+				resolve(res.data);
 			})
 			.catch(err => {
 				reject(err);
@@ -65,7 +65,7 @@ const actions = {
 		return new Promise((resolve, reject) => {
 			httpClient.patch(URI, body, config)
 			.then(res => {
-				resolve(res);
+				resolve(res.data);
 			})
 			.catch(err => {
 				reject(err);
