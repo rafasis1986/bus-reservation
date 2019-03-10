@@ -1,8 +1,7 @@
 <template>
 	<div class="my-profile row">
 
-		<LoaderCol12
-			v-if="loading"/>
+		<Loader v-if="loading"/>
 
 		<template
 			v-if="!loading">
@@ -29,7 +28,8 @@
 
 <script>	
 	import ContainerActions from '@/components/ContainerActions';
-	import httpErrorMixin from '@/mixins/httpErrorMixin';
+    import httpErrorMixin from '@/mixins/httpErrorMixin';
+    import Loader from '@/components/loader/Loader'
 	
 	import Vuex from 'vuex';
     import { createNamespacedHelpers } from 'vuex';
@@ -41,7 +41,8 @@
 	export default {
 		name: 'MyProfile',
 		components: {
-			ContainerActions
+            ContainerActions,
+            Loader
 		},
 		data() {
 			return {
@@ -66,10 +67,17 @@
 				this.loading = true;
 				this.getAPI({ uriName: 'users', path: this.storeUser.id })
 				.then((res) => {
-					this.user = res.data;
-					this.loading = false;
+                    if ( res.data.type === 'user') {
+                        this.user = res.data.attributes;
+                    }
+                    else {
+                        console.log(res);
+                    }
 				})
-				.catch(this.handleHttpError);
+                .catch(this.handleHttpError)
+                .finally( () => {
+                    this.loading = false;
+                });
 			}
 			
 		},

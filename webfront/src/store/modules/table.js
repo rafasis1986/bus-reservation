@@ -20,8 +20,8 @@ const actions = {
 			.then(res => {
 				commit('setList', res.data)
 			})
-			.catch(res => {
-				console.log(res.response);
+			.catch(err => {
+				console.log(err);
 			});
 	},
 	resetList({ commit }) {
