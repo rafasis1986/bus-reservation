@@ -1,4 +1,4 @@
-import { axiosSgi } from '@/axios/instances';
+import { httpClient } from '@/axios/instances';
 import { BASE_URIS } from '@/axios/constants';
 
 const state = {
@@ -12,63 +12,63 @@ const mutations = {
 };
 
 const actions = {
-	getSGI(context, { uriName, path, params }) {
-		const URI = path ? BASE_URIS[uriName] + path : BASE_URIS[uriName];
+	getAPI(context, { uriName, path, params }) {
+        const URI = path ? BASE_URIS[uriName] + path : BASE_URIS[uriName];
 		return new Promise((resolve, reject) => {
-			axiosSgi.get(URI, {
+			httpClient.get(URI, {
 				params: { ...params }
 			})
 			.then(res => {
 				resolve(res);
 			})
-			.catch(res => {
-				reject(res);
+			.catch(err => {
+				reject(err);
 			});
 		});
 	},
-	postSGI(context, { uriName, body }) {
+	postAPI(context, { uriName, body }) {
 		return new Promise((resolve, reject) => {
-			axiosSgi.post(BASE_URIS[uriName], body)
+			httpClient.post(BASE_URIS[uriName], body)
 			.then(res => {
 				resolve(res);
 			})
-			.catch(res => {
-				reject(res);
+			.catch(err => {
+				reject(err);
 			});
 		});
 	},
-	patchSGI(context, { uriName, body, path }) {
+	patchAPI(context, { uriName, body, path }) {
 		const URI = path ? BASE_URIS[uriName] + path +'/' : BASE_URIS[uriName];
 		return new Promise((resolve, reject) => {
-			axiosSgi.patch(URI, body)
+			httpClient.patch(URI, body)
 			.then(res => {
 				resolve(res);
 			})
-			.catch(res => {
-				reject(res);
+			.catch(err => {
+				reject(err);
 			});
 		});
 	},
-	configPostSGI(context, { uriName, body, config }) {
+	configPostAPI(context, { uriName, body, config }) {
 		return new Promise((resolve, reject) => {
-			axiosSgi.post(BASE_URIS[uriName], body, config)
+			httpClient.post(BASE_URIS[uriName], body, config)
 			.then(res => {
 				resolve(res);
 			})
-			.catch(res => {
-				reject(res);
+			.catch(err => {
+				reject(err);
 			});
 		});
 	},
-	configPatchSGI(context, { uriName, body, config, path }) {
+	configPatchAPI(context, { uriName, body, config, path }) {
 		const URI = path ? BASE_URIS[uriName] + path +'/' : BASE_URIS[uriName];
 		return new Promise((resolve, reject) => {
-			axiosSgi.patch(URI, body, config)
+			httpClient.patch(URI, body, config)
 			.then(res => {
 				resolve(res);
 			})
-			.catch(res => {
-				reject(res);
+			.catch(err => {
+				reject(err);
 			});
 		});
 	},

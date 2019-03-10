@@ -1,4 +1,4 @@
-import { axiosSgi } from '@/axios/instances';
+import { httpClient } from '@/axios/instances';
 import { BASE_URIS } from '@/axios/constants';
 
 const state = {
@@ -27,15 +27,20 @@ const mutations = {
 const actions = {
 	login({ dispatch }, userData) {
 		return new Promise((resolve, reject) => {
-			axiosSgi.post(BASE_URIS.login, userData)
+            let config = { 
+                headers: {
+                    'Content-Type': 'application/vnd.api+json',
+                    'Accept': 'application/vnd.api+json'
+                }};
+			httpClient.post(BASE_URIS.login, userData, config)
 			.then(res => {
-				sessionStorage.setItem('id', res.data.user_id);
 				sessionStorage.setItem('token', res.data.token);
-				sessionStorage.setItem('permissions', res.data.user_permissions);
-				dispatch('configUser', sessionStorage);
+				sessionStorage.setItem('permissions', []);
+                dispatch('configUser', sessionStorage);
 				resolve(res);
 			})
 			.catch(res => {
+                console.log(res);
 				reject(res);
 			});
 		});
@@ -43,12 +48,12 @@ const actions = {
 	configUser({ commit }, userData) {
 		const { id, token, permissions} = userData;
 		commit('setUser', { id, token, permissions: permissions.split(',') });
-		axiosSgi.defaults.headers.common['Authorization'] = 'Token ' + token;
+		httpClient.defaults.headers.common['Authorization'] = 'Bearer ' + token;
 	},
 	logout({commit}) {
 		commit('setUser', {});
 		sessionStorage.clear();
-		delete axiosSgi.defaults.headers.common['Authorization'];
+		delete httpClient.defaults.headers.common['Authorization'];
 	}
 };
 

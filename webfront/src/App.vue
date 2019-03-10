@@ -4,7 +4,7 @@
 			<Login/>
 		</template>
 		<template v-else>
-			<TheApp/>
+			<MainApp/>
 		</template>
 	</div>
 </template>

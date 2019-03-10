@@ -1,4 +1,4 @@
-import { axiosSgi } from '@/axios/instances';
+import { httpClient } from '@/axios/instances';
 import { BASE_URIS } from '@/axios/constants';
 
 const state = {
@@ -16,7 +16,7 @@ const mutations = {
 
 const actions = {
 	fetchList({ commit }, uriName) {
-		axiosSgi.get(BASE_URIS[uriName])
+		httpClient.get(BASE_URIS[uriName])
 			.then(res => {
 				commit('setList', res.data)
 			})

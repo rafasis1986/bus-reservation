@@ -5,7 +5,7 @@ import {
 } from '@/axios/constants';
 
 
-export const axiosSgi = axios.create({
+export const httpClient = axios.create({
 	baseURL: API_BASE_URL,
 	headers: {
 		common: {},
@@ -18,5 +18,4 @@ export const axiosSgi = axios.create({
 	}
 });
 
-axiosSgi.defaults.headers.post['Content-Type'] = 'application/json';
-
+httpClient.defaults.headers.common['Content-Type'] = 'application/vnd.api+json';
