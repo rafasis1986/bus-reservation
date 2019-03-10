@@ -2,6 +2,12 @@ export const BASE_URL = 'http://localhost:8000/api/v1';
 
 
 export const BASE_URIS = {
-	users: BASE_URL + '/users/',
+    user: BASE_URL + '/users/',
+    users: BASE_URL + '/users',
+    cities: BASE_URL + '/cities',
+    buses: BASE_URL + '/buses',
+    tickets: BASE_URL + '/tickets',
+    itineraries: BASE_URL + '/itineraries',
 	login: BASE_URL + '/login/'
 };
+

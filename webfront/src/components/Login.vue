@@ -153,7 +153,6 @@
                     })
 					.then((res) => {
                         console.log('success login');
-                        console.log(sessionStorage.getItem('token'));
 					})
 					.catch((err) => {
                         this.authError = true;

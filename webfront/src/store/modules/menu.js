@@ -31,9 +31,10 @@ const mutations = {
 
 const actions = {
 	createMenu({ commit, rootGetters }, routes) {
-		let tempSections = [];
+        let tempSections = [];
 		for(const item of routes){
 			if(item.name){
+                
 				let tempSubsections = [];
 				for(const child of item.children) {
 					if(

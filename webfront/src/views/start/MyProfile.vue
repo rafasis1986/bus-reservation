@@ -65,7 +65,7 @@
 			}),
 			loadData() {
 				this.loading = true;
-				this.getAPI({ uriName: 'users', path: this.storeUser.id })
+				this.getAPI({ uriName: 'user', path: this.storeUser.id })
 				.then((res) => {
                     if ( res.data.type === 'user') {
                         this.user = res.data.attributes;

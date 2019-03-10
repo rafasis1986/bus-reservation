@@ -4,6 +4,8 @@ const state = {
 	]
 };
 
+const subLinks = ['subUsers'];
+
 const mutations = {
 	setFlow(state, flowArray){
 		state.flow.push(flowArray);
@@ -14,7 +16,26 @@ const mutations = {
 			
 		});
 		state.flow.length = index + 1;
-	}
+    },
+    modifyFlow(state, actualRoute){
+		const index = subLinks.indexOf(actualRoute.to);
+
+		if(index !== -1){
+			for(const itemA of subLinks){
+				for(const itemB of state.flow){
+					if(itemA === itemB.to){
+						state.flow.length = 1;
+						switch(actualRoute.to){
+							case 'subUsers':
+								state.flow.push({name: 'Users', to: 'subUsers'})
+								break;							
+						}
+
+					}
+				}
+			}
+        }
+    }
 };
 
 const actions = {
@@ -26,8 +47,8 @@ const actions = {
 		if(routes.prop){
 			tempObject.param = routes.prop;
 		}
-		
-		commit('setFlow', tempObject);
+        commit('setFlow', tempObject);
+        commit('modifyFlow', tempObject);
 		commit('deleteSameFlow', tempObject);
 	},
 	createManualBreadcrumb({commit}, routes){
@@ -36,9 +57,9 @@ const actions = {
 		tempObject.name = routes.name;
 		if(routes.prop){
 			tempObject.param = routes.prop;
-		}
-		commit('setFlow', tempObject);
-	
+        }
+        commit('setFlow', tempObject);
+		commit('modifyFlow', tempObject);
 		commit('deleteSameFlow', tempObject);
 	}
 }
