@@ -21,5 +21,9 @@ docker-compose up -d
 Create a superuser to login to the admin:
 
 ```bash
-docker-compose run --rm web ./manage.py createsuperuser
+docker-compose run --rm django python manage.py createsuperuser
 ```
+
+# Database model
+
+![Models Image](models.png)

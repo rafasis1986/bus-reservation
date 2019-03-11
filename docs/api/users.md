@@ -11,11 +11,11 @@ Parameters:
 
 Name       | Type   | Required | Description
 -----------|--------|----------|------------
-username   | string | Yes      | The username for the new user.
+username   | string | Yes      | The rut for the new user.
 password   | string | Yes      | The password for the new user account.
 first_name | string | No       | The user's given name.
 last_name  | string | No       | The user's family name.
-email      | string | No       | The user's email address.
+email      | string | Yes       | The user's email address.
 
 *Note:*
 
