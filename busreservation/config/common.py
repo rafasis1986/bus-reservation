@@ -24,6 +24,7 @@ class Common(Configuration):
         'rest_framework.authtoken',
         'django_filters',
         'corsheaders',
+        'django_extensions',
 
         # Your apps
         'busreservation.users',

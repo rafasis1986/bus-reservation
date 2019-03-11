@@ -17,7 +17,7 @@ class CustomUserManager(UserManager):
             raise ValueError('The given email must be set')
         extra_fields.setdefault('is_staff', False)
         extra_fields.setdefault('is_superuser', False)
-        extra_fields.setdefault('is_active', False)
+        extra_fields.setdefault('is_active', True)
         return self._create_user(username, email, password, **extra_fields)
 
 
@@ -40,9 +40,3 @@ class User(AbstractUser):
 
     class JSONAPIMeta:
         resource_name = 'user'
-
-
-@receiver(post_save, sender=settings.AUTH_USER_MODEL)
-def create_auth_token(sender, instance=None, created=False, **kwargs):
-    if created:
-        Token.objects.create(user=instance)
