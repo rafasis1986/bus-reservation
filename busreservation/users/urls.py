@@ -4,7 +4,8 @@ from rest_framework.routers import DefaultRouter
 from busreservation.users import views
 
 
-router = DefaultRouter()
+router = DefaultRouter(trailing_slash=False)
+
 router.register(r'users', views.UserViewSet)
 router.register(r'users', views.UserCreateViewSet)
 

@@ -6,6 +6,7 @@ from busreservation.reservations import views
 
 
 router = DefaultRouter()
+
 router.register('buses', views.BusViewSet)
 router.register('cities', views.CityViewSet)
 router.register('itineraries', views.ItineraryViewSet)
