@@ -19,5 +19,6 @@ djangorestframework==3.9.1
 Markdown==3.0.1
 django-filter==2.1.0
 djangorestframework-jwt==1.11.0
+django-rest-auth==0.9.3
 -e git+https://github.com/rafasis1986/django-rest-framework-json-api.git#egg=djangorestframework-jsonapi
 
