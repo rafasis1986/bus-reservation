@@ -1,0 +1,57 @@
+version: '3'
+
+volumes:
+  postgres_data: {}
+  postgres_data_backups: {}
+
+services:
+  django: &django
+    build:
+      context: .
+      dockerfile: ./docker/django/Dockerfile
+    image: reservation_django
+    depends_on:
+      - postgres
+      - mailhog
+    volumes:
+      - .:/app
+    env_file:
+      - ./conf/django
+      - ./conf/postgres
+    ports:
+      - "8000:8000"
+    command: /start
+
+  postgres:
+    build:
+      context: .
+      dockerfile: ./docker/postgres/Dockerfile
+    image: reservation_postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - postgres_data_backups:/backups
+    env_file:
+      - ./conf/postgres
+    ports:
+      - "15432:5432"
+
+  mailhog:
+    image: mailhog/mailhog:v1.0.0
+    ports:
+      - "8025:8025"
+
+  documentation:
+    <<: *django
+    image: reservation_doc
+    command: "mkdocs serve"
+    ports:
+      - "8001:8001"
+
+  vue:
+    build:
+        context: .
+        dockerfile: ./docker/vue/Dockerfile
+    volumes:
+        - ./webapp:/webapp
+    ports:
+      - "8080:80"
