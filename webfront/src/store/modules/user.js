@@ -44,6 +44,22 @@ const actions = {
 				reject(err);
 			});
 		});
+    },
+    signUp({ dispatch }, userData) {
+		return new Promise((resolve, reject) => {
+            let config = { 
+                headers: {
+                    'Content-Type': 'application/vnd.api+json',
+                    'Accept': 'application/vnd.api+json'
+                }};
+			httpClient.post(BASE_URIS.signup, userData, config)
+			.then(res => {
+				resolve(res.data.data);
+			})
+			.catch(err => {
+				reject(err);
+			});
+		});
 	},
 	configUser({ commit }, userData) {
 		const { id, token, permissions} = userData;

@@ -8,6 +8,7 @@ export const BASE_URIS = {
     buses: BASE_URL + '/buses',
     tickets: BASE_URL + '/tickets',
     itineraries: BASE_URL + '/itineraries',
-	login: BASE_URL + '/login/'
+    login: BASE_URL + '/login/',
+    signup: BASE_URL + '/user'
 };
 
