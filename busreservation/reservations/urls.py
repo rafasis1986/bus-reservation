@@ -5,7 +5,7 @@ from rest_framework.routers import DefaultRouter
 from busreservation.reservations import views
 
 
-router = DefaultRouter()
+router = DefaultRouter(trailing_slash=False)
 
 router.register('buses', views.BusViewSet)
 router.register('cities', views.CityViewSet)

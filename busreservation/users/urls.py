@@ -7,7 +7,7 @@ from busreservation.users import views
 router = DefaultRouter(trailing_slash=False)
 
 router.register(r'users', views.UserViewSet)
-router.register(r'users', views.UserCreateViewSet)
+router.register(r'user', views.UserCreateViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),

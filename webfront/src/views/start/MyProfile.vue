@@ -70,9 +70,6 @@
                     if ( res.data.type === 'user') {
                         this.user = res.data.attributes;
                     }
-                    else {
-                        console.log(res);
-                    }
 				})
                 .catch(this.handleHttpError)
                 .finally( () => {

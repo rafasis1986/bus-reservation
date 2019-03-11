@@ -225,14 +225,15 @@
             },
             errorPassword2Message() {
                 if ( !this.isLogin ) {
-				    if(!this.$v.password2.required) {
-					   return HELP_MESSAGES.REQUIRED_VALUE('password');
+                    if(!this.$v.password2.required) {
+                        return HELP_MESSAGES.REQUIRED_VALUE('password');
                     }
                     else if ( this.$v.password2 != this.$v.password){
                         return HELP_MESSAGES.SAME_AS_PASS;
+                    
                     }
-				    else {
-					   return HELP_MESSAGES.DEFAULT;
+                    else {
+                        return HELP_MESSAGES.DEFAULT;
                     }
                 }
             },
@@ -343,14 +344,12 @@
                         }
                     })
 					.then((res) => {
-                        console.log(res);
                         this.authError = false;
                         this.isLogin = true;
                         this.userCreated = true;
                         this.signUpMessage = 'The user ' + res.attributes.username +' has been successfully signup';
 					})
 					.catch((err) => {
-                        console.log(err);
                         this.authError = true;
                         this.authErrorMessage = ERROR_MESSAGES.DEFAULT;
                         if (err.response && err.response.data){

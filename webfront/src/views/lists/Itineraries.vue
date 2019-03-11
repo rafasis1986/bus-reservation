@@ -55,7 +55,7 @@
 				this.getSGI({ uriName: 'itineraries' })
 				.then(res => {
                     res.data.forEach( (itinerary) => {
-                        if (city.type === 'itinerary' ){
+                        if (itinerary.type === 'itinerary' ){
                             this.items.push(itinerary.attributes);
                         }
                     })

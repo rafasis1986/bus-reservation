@@ -20,9 +20,9 @@ class Common(Configuration):
         'django.contrib.staticfiles',
 
         # Third party apps
-        'rest_framework',            # utilities for rest apis
-        'rest_framework.authtoken',  # token authentication
-        'django_filters',            # for filtering rest endpoints
+        'rest_framework',
+        'rest_framework.authtoken',
+        'django_filters',
         'corsheaders',
 
         # Your apps
@@ -194,7 +194,6 @@ class Common(Configuration):
         'DATETIME_FORMAT': '%Y-%m-%dT%H:%M:%S%z',
         'DEFAULT_RENDERER_CLASSES': (
             'rest_framework_json_api.renderers.JSONRenderer',
-            'rest_framework.renderers.BrowsableAPIRenderer',
         ),
         'DEFAULT_PERMISSION_CLASSES': [
             'rest_framework.permissions.IsAuthenticated',
